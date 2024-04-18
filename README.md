@@ -35,3 +35,23 @@ import 'echarts-extension-bingmaps';
 ```
 
 ### Examples
+
+#### FlyChart
+![image](https://github.com/andybuibui/echarts-extension-bingmaps/assets/23742065/d7b606f0-e6bd-4247-bfda-22c3d63a4add)
+
+### Heart Chart
+![image](https://github.com/andybuibui/echarts-extension-bingmaps/assets/23742065/df57d90f-8e39-4646-a44f-94dbde858105)
+
+#### Line Chart
+![image](https://github.com/andybuibui/echarts-extension-bingmaps/assets/23742065/53478a66-597a-407c-9fb1-e0eec2be0edb)
+
+#### Pie Chart
+![image](https://github.com/andybuibui/echarts-extension-bingmaps/assets/23742065/69706545-b68c-4d7c-bfd5-28a321c96766)
+
+#### Scatter Chart
+![image](https://github.com/andybuibui/echarts-extension-bingmaps/assets/23742065/45916004-b9cc-4e06-8524-c89fd6f8efba)
+
+
+
+
+
