@@ -24,7 +24,8 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- */import * as m from "echarts";
+ */
+import * as m from "echarts";
 import { graphic as w, matrix as b, util as h } from "echarts";
 function C(t, o) {
   return t && o && t[0] === o[0] && t[1] === o[1];

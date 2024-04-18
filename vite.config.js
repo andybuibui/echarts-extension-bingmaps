@@ -8,7 +8,7 @@ const RollupBannerPlugin = {
     const banner = getBanner()
     for (const module of Object.values(bundle)) {
       if (module.type === 'chunk') {
-        module.code = banner + module.code
+        module.code = banner + '\n' + module.code
       }
     }
   }
