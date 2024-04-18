@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>echarts extension bingmaps</title>
+    <script
+      type="text/javascript"
+      src="https://www.bing.com/api/maps/mapcontrol?key=${your-bingmapkey}&setlang=zh-cn"
+    ></script>
+    <!-- ECharts CDN -->
+    <script
+      type="text/javascript"
+      src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"
+    ></script>
+    <script type="text/javascript" src="../dist/echarts-extension-bingmaps.umd.cjs"></script>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body,
+      #app,
+      #echarts-bingmap {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body onload="loadMap()">
+    <div id="app">
+      <div id="echarts-bingmap"></div>
+    </div>
+  </body>
+  <script>
+    const midnightMapStyle = {
+      version: '1.0',
+      settings: {
+        landColor: '#0B334D',
+      },
+      elements: {
+        mapElement: {
+          labelColor: '#FFFFFF',
+          labelOutlineColor: '#000000',
+        },
+        political: {
+          borderStrokeColor: '#144B53',
+          borderOutlineColor: '#00000000',
+        },
+        point: {
+          iconColor: '#0C4152',
+          fillColor: '#000000',
+          strokeColor: '#0C4152',
+        },
+        transportation: {
+          strokeColor: '#000000',
+          fillColor: '#000000',
+        },
+        highway: {
+          strokeColor: '#158399',
+          fillColor: '#000000',
+        },
+        controlledAccessHighway: {
+          strokeColor: '#158399',
+          fillColor: '#000000',
+        },
+        arterialRoad: {
+          strokeColor: '#157399',
+          fillColor: '#000000',
+        },
+        majorRoad: {
+          strokeColor: '#157399',
+          fillColor: '#000000',
+        },
+        railway: {
+          strokeColor: '#146474',
+          fillColor: '#000000',
+        },
+        structure: {
+          fillColor: '#115166',
+        },
+        water: {
+          fillColor: '#021019',
+        },
+        area: {
+          fillColor: '#115166',
+        },
+      },
+    };
+    const linesDataURI =
+      'https://cdn.jsdelivr.net/gh/apache/echarts-examples/public/data/asset/data/lines-bus.json';
+
+    function loadMap() {
+      // initialize chart
+      fetch(linesDataURI, { method: 'GET' })
+        .then((response) => response.json())
+        .then((data) => {
+          // convert
+          const hStep = 300 / (data.length - 1);
+          const busLines = [].concat.apply(
+            [],
+            data.map((busLine, idx) => {
+              let prevPt;
+              let points = [];
+              for (let i = 0; i < busLine.length; i += 2) {
+                let pt = [busLine[i], busLine[i + 1]];
+                if (i > 0) {
+                  pt = [prevPt[0] + pt[0], prevPt[1] + pt[1]];
+                }
+                prevPt = pt;
+
+                points.push([pt[0] / 1e4, pt[1] / 1e4]);
+              }
+              return {
+                coords: points,
+                lineStyle: {
+                  color: echarts.color.modifyHSL('#5A94DF', Math.round(hStep * idx)),
+                },
+              };
+            }),
+          );
+          const option = {
+            bingmap: {
+              viewOption: {
+                center: [116.46, 39.92],
+                zoom: 10,
+                mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+              },
+              mapOption: {
+                mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+              },
+            },
+            series: [
+              {
+                type: 'lines',
+                coordinateSystem: 'bingmap',
+                polyline: true,
+                data: busLines,
+                silent: true,
+                lineStyle: {
+                  opacity: 0.2,
+                  width: 1,
+                },
+                progressiveThreshold: 500,
+                progressive: 200,
+              },
+              {
+                type: 'lines',
+                coordinateSystem: 'bingmap',
+                polyline: true,
+                data: busLines,
+                lineStyle: {
+                  width: 0,
+                },
+                effect: {
+                  constantSpeed: 20,
+                  show: true,
+                  trailLength: 0.1,
+                  symbolSize: 1.5,
+                },
+                zlevel: 1,
+              },
+            ],
+          };
+          const chart = echarts.init(document.getElementById('echarts-bingmap'));
+          chart.setOption(option);
+        })
+        .catch((e) => {
+          console.log('error: ' + e.toString());
+        });
+    }
+  </script>
+</html>

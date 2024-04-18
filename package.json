@@ -1,0 +1,50 @@
+{
+  "name": "echarts-extension-bingmaps",
+  "description": "bingmap for Apache ECharts (https://github.com/apache/echarts)",
+  "private": false,
+  "version": "1.0.0",
+  "type": "module",
+  "author": "andybuibui",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "main": "./dist/echarts-extension-bingmaps.umd.cjs",
+  "module": "./dist/echarts-extension-bingmaps.js",
+  "types": "./index.d.ts",
+  "exports": {
+    "types": "./index.d.ts",
+    "import": "./dist/echarts-extension-bingmaps.js",
+    "require": "./dist/echarts-extension-bingmaps.umd.cjs"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andybuibui/echarts-extension-bingmaps"
+  },
+  "bugs": {
+    "url": "https://github.com/andybuibui/echarts-extension-bingmaps/issues"
+  },
+  "homepage": "https://github.com/andybuibui/echarts-extension-bingmaps#readme",
+  "keywords": [
+    "echarts",
+    "bingmap",
+    "echarts-extension",
+    "map",
+    "biying",
+    "echarts-bingmap",
+    "echarts4",
+    "echarts5",
+    "bing",
+    "echarts-extension-bingmaps"
+  ],
+  "devDependencies": {
+    "echarts": "^5.5.0",
+    "prettier": "^3.2.5",
+    "vite": "^5.0.10"
+  }
+}

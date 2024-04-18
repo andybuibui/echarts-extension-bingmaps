@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>echarts extension bingmaps</title>
+    <script
+      type="text/javascript"
+      src="https://www.bing.com/api/maps/mapcontrol?key=${your-bingmapkey}&setlang=zh-cn"
+    ></script>
+    <!-- ECharts CDN -->
+    <script
+      type="text/javascript"
+      src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"
+    ></script>
+    <script type="text/javascript" src="../dist/echarts-extension-bingmaps.umd.cjs"></script>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body,
+      #app,
+      #echarts-bingmap {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body onload="loadMap()">
+    <div id="app">
+      <div id="echarts-bingmap"></div>
+    </div>
+  </body>
+  <script>
+    const data = {
+      北京: [10, 20, 30, 40],
+      攀枝花: [15, 20, 36, 42],
+      开封: [17, 42, 15, 31],
+      上海: [46, 50, 59, 80],
+      广州: [90, 45, 36, 15],
+    };
+    const geoCoords = {
+      北京: [116.46, 39.92],
+      攀枝花: [101.718637, 26.582347],
+      开封: [114.35, 34.79],
+      上海: [121.48, 31.22],
+      广州: [113.23, 23.16],
+    };
+    const pieDimensions = ['A', 'B', 'C', 'D'];
+    const pieSeries = [];
+    echarts.util.each(data, function (values, name) {
+      pieSeries.push({
+        type: 'pie',
+        name: name,
+        coordinateSystem: 'bingmap',
+        center: geoCoords[name],
+        radius: 20,
+        data: echarts.util.map(values, function (value, idx) {
+          return {
+            name: pieDimensions[idx],
+            value: value,
+          };
+        }),
+        label: {
+          show: false,
+        },
+        emphasis: {
+          label: {
+            show: true,
+          },
+          labelLine: {
+            show: true,
+            lineStyle: {
+              color: '#fff',
+            },
+          },
+        },
+      });
+    });
+
+    const option = {
+      bingmap: {
+        viewOption: {
+          center: [113.493471, 23.169598],
+          zoom: 5,
+        },
+      },
+      tooltip: {
+        trigger: 'item',
+      },
+      animation: true,
+      series: pieSeries,
+    };
+
+    function loadMap() {
+      const chart = echarts.init(document.getElementById('echarts-bingmap'));
+      chart.setOption(option);
+    }
+  </script>
+</html>

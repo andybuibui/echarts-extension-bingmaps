@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>echarts extension bingmaps</title>
+    <script
+      type="text/javascript"
+      src="https://www.bing.com/api/maps/mapcontrol?key=${your-bingmapkey}&setlang=zh-cn"
+    ></script>
+    <!-- ECharts CDN -->
+    <script
+      type="text/javascript"
+      src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"
+    ></script>
+    <script type="text/javascript" src="../dist/echarts-extension-bingmaps.umd.cjs"></script>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body,
+      #app,
+      #echarts-bingmap {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body onload="loadMap()">
+    <div id="app">
+      <div id="echarts-bingmap"></div>
+    </div>
+  </body>
+  <script>
+    const midnightMapStyle = {
+      version: '1.0',
+      settings: {
+        landColor: '#0B334D',
+      },
+      elements: {
+        mapElement: {
+          labelColor: '#FFFFFF',
+          labelOutlineColor: '#000000',
+        },
+        political: {
+          borderStrokeColor: '#144B53',
+          borderOutlineColor: '#00000000',
+        },
+        point: {
+          iconColor: '#0C4152',
+          fillColor: '#000000',
+          strokeColor: '#0C4152',
+        },
+        transportation: {
+          strokeColor: '#000000',
+          fillColor: '#000000',
+        },
+        highway: {
+          strokeColor: '#158399',
+          fillColor: '#000000',
+        },
+        controlledAccessHighway: {
+          strokeColor: '#158399',
+          fillColor: '#000000',
+        },
+        arterialRoad: {
+          strokeColor: '#157399',
+          fillColor: '#000000',
+        },
+        majorRoad: {
+          strokeColor: '#157399',
+          fillColor: '#000000',
+        },
+        railway: {
+          strokeColor: '#146474',
+          fillColor: '#000000',
+        },
+        structure: {
+          fillColor: '#115166',
+        },
+        water: {
+          fillColor: '#021019',
+        },
+        area: {
+          fillColor: '#115166',
+        },
+      },
+    };
+    const linesDataURI =
+      'https://fastly.jsdelivr.net/gh/apache/echarts-examples/public/data/asset/data/hangzhou-tracks.json';
+    function loadMap() {
+      fetch(linesDataURI, { method: 'GET' })
+        .then((response) => response.json())
+        .then((data) => {
+          const points = [].concat.apply(
+            [],
+            data.map(function (track) {
+              return track.map(function (seg) {
+                return seg.coord.concat([1]);
+              });
+            }),
+          );
+          // set the data for heatmap
+          const option = {
+            bingmap: {
+              viewOption: {
+                center: [120.098776, 30.226665],
+                zoom: 13,
+              },
+              mapOption: {
+                customMapStyle: midnightMapStyle,
+              },
+            },
+            visualMap: {
+              show: true,
+              right: 20,
+              min: 0,
+              max: 5,
+              seriesIndex: 0,
+              calculable: true,
+              inRange: {
+                color: ['blue', 'blue', 'green', 'yellow', 'red'],
+              },
+            },
+            animation: false,
+            series: [
+              {
+                type: 'heatmap',
+                // use `amap` as the coordinate system
+                coordinateSystem: 'bingmap',
+                data: points,
+                pointSize: 5,
+                blurSize: 6,
+              },
+            ],
+          };
+          const chart = echarts.init(document.getElementById('echarts-bingmap'));
+          chart.setOption(option);
+        })
+        .catch((e) => {
+          console.log('error: ' + e.toString());
+        });
+    }
+  </script>
+</html>
