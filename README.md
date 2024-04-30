@@ -12,7 +12,7 @@ npm install echarts-extension-bingmaps --save
 
 ### Import
 
-Import packaged distribution file `echarts-extension-bingmaps.umd.cjs` and add AMap API script and ECharts script.
+Import packaged distribution file `echarts-extension-bingmaps.umd.cjs` and add BingMap API script and ECharts script.
 
 ```html
 <script src="https://www.bing.com/api/maps/mapcontrol?key=${your-bingmapkey}&setlang=zh-cn"></script>
