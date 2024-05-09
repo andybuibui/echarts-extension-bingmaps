@@ -2,25 +2,19 @@
   "name": "echarts-extension-bingmaps",
   "description": "bingmap for Apache ECharts (https://github.com/apache/echarts)",
   "private": false,
-  "version": "1.0.2",
-  "type": "module",
+  "version": "2.0.0",
   "author": "andybuibui",
   "license": "MIT",
   "files": [
     "dist",
     "index.d.ts"
   ],
-  "main": "./dist/echarts-extension-bingmaps.umd.cjs",
-  "module": "./dist/echarts-extension-bingmaps.js",
-  "types": "./index.d.ts",
-  "exports": {
-    "types": "./index.d.ts",
-    "import": "./dist/echarts-extension-bingmaps.js",
-    "require": "./dist/echarts-extension-bingmaps.umd.cjs"
-  },
+  "main": ".dist/echarts-extension-bingmaps.min.js",
+  "module": "dist/echarts-extension-bingmaps.esm.js",
+  "types": "index.d.ts",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+    "dev": "rollup -wc --bundleConfigAsCjs --environment NODE_ENV:development",
+    "build": "rollup -c --bundleConfigAsCjs --environment NODE_ENV:production"
   },
   "repository": {
     "type": "git",
@@ -43,8 +37,17 @@
     "echarts-extension-bingmaps"
   ],
   "devDependencies": {
+    "@babel/core": "^7.24.5",
+    "@babel/preset-env": "^7.24.5",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/echarts": "^4.9.22",
+    "chalk": "^4.1.2",
     "echarts": "^5.5.0",
     "prettier": "^3.2.5",
-    "vite": "^5.0.10"
+    "rollup": "^4.17.2"
   }
 }
