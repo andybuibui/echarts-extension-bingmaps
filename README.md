@@ -12,14 +12,14 @@ npm install echarts-extension-bingmaps --save
 
 ### Import
 
-Import packaged distribution file `echarts-extension-bingmaps.umd.cjs` and add BingMap API script and ECharts script.
+Import packaged distribution file `echarts-extension-bingmaps` and add BingMap API script and ECharts script.
 
 ```html
 <script src="https://www.bing.com/api/maps/mapcontrol?key=${your-bingmapkey}&setlang=zh-cn"></script>
 <!-- import ECharts -->
 <script src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 <!-- import echarts-extension-bingmaps -->
-<script src="dist/echarts-extension-bingmaps.umd.cjs"></script>
+<script src="https://fastly.jsdelivr.net/npm/echarts-extension-bingmaps/dist/echarts-extension-bingmaps.min.js"></script>
 ```
 
 You can also import this extension by `require` or `import` if you are using `webpack` or any other bundler.
