@@ -13,8 +13,7 @@
   "module": "dist/echarts-extension-bingmaps.esm.js",
   "types": "index.d.ts",
   "scripts": {
-    "dev": "rollup -wc --bundleConfigAsCjs --environment NODE_ENV:development",
-    "build": "rollup -c --bundleConfigAsCjs --environment NODE_ENV:production"
+    "build": "rollup -c --bundleConfigAsCjs"
   },
   "repository": {
     "type": "git",
