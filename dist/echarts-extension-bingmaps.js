@@ -1,6 +1,6 @@
 /*!
  * echarts-extension-bingmaps 
- * @version 1.0.4
+ * @version 2.0.1
  * @author andybuibui
  * 
  * MIT License
@@ -261,7 +261,7 @@
   };
 
   var name = "echarts-extension-bingmaps";
-  var version = "1.0.4";
+  var version = "2.0.1";
 
   /**
    * BingMap extension installer
@@ -275,7 +275,7 @@
           var coordSys = seriesModel.coordinateSystem;
           var data = seriesModel.getData();
           var valueDim = data.mapDimension('value');
-          if (coordSys && coordSys.type === COMPONENT_TYPE) {
+          if (coordSys && coordSys._type === COMPONENT_TYPE) {
             var center = seriesModel.get('center');
             var point = coordSys.dataToPoint(center);
             var cx = point[0];
