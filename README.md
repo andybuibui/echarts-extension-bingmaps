@@ -1,5 +1,8 @@
 [![NPM version](https://img.shields.io/npm/v/echarts-extension-bingmaps.svg?style=flat)](https://www.npmjs.org/package/echarts-extension-bingmaps) [![NPM Downloads](https://img.shields.io/npm/dm/echarts-extension-bingmaps.svg)](https://npmcharts.com/compare/echarts-extension-bingmaps?minimal=true) [![jsDelivr Downloads](https://data.jsdelivr.com/v1/package/npm/echarts-extension-bingmaps/badge?style=rounded)](https://www.jsdelivr.com/package/npm/echarts-extension-bingmaps)
 
+## Warning：Migrating to Azure Map
+![346051349-c99c6b1a-36fa-4f13-91f4-9a770a2668af](https://github.com/andybuibui/echarts-extension-bingmaps/assets/23742065/95849877-4ff8-4702-856a-8f83b732a6ff)
+
 ## Bingmap extension for Apache ECharts
 
 This is an Bingmap extension for [Apache ECharts](https://echarts.apache.org/en/index.html)
